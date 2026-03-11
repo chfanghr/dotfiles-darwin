@@ -215,4 +215,6 @@
 
     difftastic.git.enable = true;
   };
+
+  services.pueue.enable = true;
 }
