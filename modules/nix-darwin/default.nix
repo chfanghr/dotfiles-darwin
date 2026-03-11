@@ -2,12 +2,13 @@
   inherit (lib) mkEnableOption;
 in {
   imports = [
+    ./users
     ./determinate.nix
     ./global.nix
     ./homebrew.nix
     ./keyboard.nix
     ./security.nix
-    ./users
+    ./services.nix
   ];
 
   options = {
