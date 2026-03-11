@@ -1,17 +1,26 @@
-{
+{lib, ...}: let
+  inherit (lib) mkEnableOption;
+in {
   imports = [
     ./determinate.nix
+    ./homebrew.nix
     ./global.nix
     ./security.nix
     ./users
   ];
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
+  options = {
+    dotfiles.darwin.slim = mkEnableOption "only enable the bare minimum" // { default = false; };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  config = {
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+    };
 
-  system.stateVersion = 6;
+    nixpkgs.config.allowUnfree = true;
+
+    system.stateVersion = 6;
+  };
 }
