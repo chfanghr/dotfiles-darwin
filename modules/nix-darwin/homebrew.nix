@@ -29,9 +29,6 @@ in
         Playgrounds = 1496833156;
         # QOL
         Discovery = 1381004916;
-        "Raivo OTP" = 1498497896;
-        # Music
-        "Pine Player" = 1112075769;
         # LyricsX = 1254743014;
         # Safari Plugins
         Tampermonkey = 6738342400;
@@ -54,10 +51,8 @@ in
       ];
       casks = [
         "music-presence"
-        "spotify"
         "notion"
         "grammarly-desktop"
-        "orbstack"
         # NOTE: use home-manager
         # "kitty"
         "foobar2000"
@@ -65,19 +60,16 @@ in
         "utm"
         "discord"
         "visual-studio-code"
-        "shottr"
         "vlc"
         "obs"
         "keycastr"
         "xnviewmp"
-        "iterm2"
         "imhex"
         "telegram"
         "signal"
         "zulip"
         "tailscale-app"
         "prismlauncher"
-        "chiaki"
         "openzfs"
         "steam"
         "crossover"
