@@ -79,6 +79,7 @@ in
         "chiaki"
         "openzfs"
 	"steam"
+	"crossover"
       ];
     };
   }
