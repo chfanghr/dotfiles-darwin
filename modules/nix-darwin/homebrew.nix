@@ -76,9 +76,9 @@ in
         "zulip"
         "tailscale-app"
         "prismlauncher"
-        "jordanbaird-ice"
-        "chiaki-ng"
+        "chiaki"
         "openzfs"
+	"steam"
       ];
     };
   }
