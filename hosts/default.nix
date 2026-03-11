@@ -8,19 +8,17 @@
   mkDarwinSystem = {
     system,
     hostname,
-    modules ? [],
   }: let
     name = hostname;
     val = inputs.nix-darwin.lib.darwinSystem {
       inherit system;
-      modules =
-        [
-          inputs.home-manager.darwinModules.default
-          inputs.determinate.darwinModules.default
-          ../modules/nix-darwin
-          {dotfiles.darwin = {inherit hostname;};}
-        ]
-        ++ modules;
+      modules = [
+        inputs.home-manager.darwinModules.default
+        inputs.determinate.darwinModules.default
+        ../modules/nix-darwin
+        {dotfiles.darwin = {inherit hostname;};}
+        ./${hostname}
+      ];
     };
   in
     nameValuePair name val;
@@ -29,8 +27,10 @@ in {
     (mkDarwinSystem {
       system = "aarch64-darwin";
       hostname = "Dioscuri";
-      modules = [./Dioscuri];
     })
-    # TODO: Hera
+    (mkDarwinSystem {
+      system = "aarch64-darwin";
+      hostname = "Hera";
+    })
   ];
 }
