@@ -1,5 +1,10 @@
-{lib, ...}: let
-  inherit (lib) mkEnableOption;
+{
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkOption types;
+  inherit (config.dotfiles.darwin) hostname;
 in {
   imports = [
     ./users
@@ -13,7 +18,14 @@ in {
   ];
 
   options = {
-    dotfiles.darwin.slim = mkEnableOption "only enable the bare minimum" // {default = false;};
+    dotfiles.darwin = {
+      slim =
+        mkEnableOption "only enable the bare minimum"
+        // {
+          default = false;
+        };
+      hostname = mkOption {type = types.str;};
+    };
   };
 
   config = {
@@ -25,5 +37,11 @@ in {
     nixpkgs.config.allowUnfree = true;
 
     system.stateVersion = 6;
+
+    networking = {
+      computerName = hostname;
+      localHostName = hostname;
+      hostName = hostname;
+    };
   };
 }
