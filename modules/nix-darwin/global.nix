@@ -9,6 +9,7 @@
     file
     zellij
     gnupg
+    vfkit
   ];
 
   programs = {
