@@ -9,5 +9,6 @@
     determinateNixd = {
       garbageCollector.strategy = "automatic";
     };
+    nixosVmBasedLinuxBuilder.enable = true;
   };
 }
