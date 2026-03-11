@@ -30,6 +30,7 @@
       sops
       imhex
       winbox4
+      fastfetch
     ];
 
     stateVersion = "24.11";
