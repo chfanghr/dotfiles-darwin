@@ -4,6 +4,7 @@ in {
   imports = [
     ./users
     ./determinate.nix
+    ./doc.nix
     ./global.nix
     ./homebrew.nix
     ./keyboard.nix
