@@ -42,6 +42,7 @@ in
         "Steam Link" = 1246969117;
         # FIXME: Shadowrocket = ??? doesn't work atm
         VidHub = 1659622164;
+	"WhatsApp Messenger" = 310633997;
       };
       brews = [
         # FIXME: requires arch -x86_64 wrapper
