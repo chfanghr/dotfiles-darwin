@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     determinate = {
-      url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+      url = "github:DeterminateSystems/determinate/v3.17.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
