@@ -3,14 +3,15 @@
 in {
   imports = [
     ./determinate.nix
-    ./homebrew.nix
     ./global.nix
+    ./homebrew.nix
+    ./keyboard.nix
     ./security.nix
     ./users
   ];
 
   options = {
-    dotfiles.darwin.slim = mkEnableOption "only enable the bare minimum" // { default = false; };
+    dotfiles.darwin.slim = mkEnableOption "only enable the bare minimum" // {default = false;};
   };
 
   config = {
