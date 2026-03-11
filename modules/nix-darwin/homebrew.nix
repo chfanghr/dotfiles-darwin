@@ -34,7 +34,7 @@ in
         "Pine Player" = 1112075769;
         # LyricsX = 1254743014;
         # Safari Plugins
-        Tampermonkey = 1482490089;
+        Tampermonkey = 6738342400;
         "AdGuard Mini" = 1440147259;
         "Grammarly for Safari" = 1462114288;
         "Sourcegraph for Safari" = 1543262193;
