@@ -16,6 +16,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    microvm-nix.url = "github:microvm-nix/microvm.nix";
   };
 
   # Flake outputs
