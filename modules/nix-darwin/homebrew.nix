@@ -15,7 +15,6 @@ in
         autoUpdate = true;
         upgrade = true;
       };
-      global.lockfiles = true;
       taps = [
         {
           name = "apple/apple";

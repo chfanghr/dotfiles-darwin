@@ -47,12 +47,28 @@
     git = {
       enable = true;
 
-      userName = "Hongrui Fang";
-      userEmail = "chfanghr@gmail.com";
+      settings = {
+        user = {
+          name = "Hongrui Fang";
+          email = "chfanghr@gmail.com";
+        };
+
+        core = {
+          autocrlf = "input";
+          editor = "${config.programs.neovim.package}/bin/nvim";
+        };
+        init.defaultBranch = "main";
+        "diff \"sopsdiffer\"".textconv = "sops -d";
+
+        aliases = rec {
+          lg1 = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
+          lg2 = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all";
+          lg = lg1;
+          hh = "rev-parse HEAD";
+        };
+      };
 
       lfs.enable = true;
-
-      difftastic.enable = true;
 
       ignores = [
         "*~"
@@ -60,25 +76,9 @@
         ".direnv"
         ".vscode"
         ".idea"
-        "dist-newstyle/"
-        "clear\\ /"
+        "result"
+        "result-*"
       ];
-
-      aliases = rec {
-        lg1 = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
-        lg2 = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all";
-        lg = lg1;
-        hh = "rev-parse HEAD";
-      };
-
-      extraConfig = {
-        core = {
-          autocrlf = "input";
-          editor = "${config.programs.neovim.package}/bin/nvim";
-        };
-        init.defaultBranch = "main";
-        "diff \"sopsdiffer\"".textconv = "sops -d";
-      };
     };
 
     home-manager.enable = true;
@@ -103,10 +103,22 @@
 
     ssh = {
       enable = true;
-      controlMaster = "auto";
-      controlPath = "~/.ssh/master-%r@%h:%p";
+
+      enableDefaultConfig = false;
 
       matchBlocks = {
+        "*" = {
+          forwardAgent = false;
+          addKeysToAgent = "no";
+          compression = false;
+          serverAliveInterval = 0;
+          serverAliveCountMax = 3;
+          hashKnownHosts = false;
+          userKnownHostsFile = "~/.ssh/known_hosts";
+          controlMaster = "auto";
+          controlPath = "~/.ssh/master-%r@%n:%p";
+          controlPersist = "no";
+        };
         "demeter.vscode" = {
           hostname = "demeter.snow-dace.ts.net";
           user = "fanghr";
@@ -142,11 +154,11 @@
       };
 
       initContent = ''
-               if [[ -r "$HOME/.iterm2_shell_integration.zsh" ]]; then
-                 source "$HOME/.iterm2_shell_integration.zsh"
-               fi
+        if [[ -r "$HOME/.iterm2_shell_integration.zsh" ]]; then
+          source "$HOME/.iterm2_shell_integration.zsh"
+        fi
 
-               export GPG_TTY="$(tty)"
+        export GPG_TTY="$(tty)"
 
         export PATH=/usr/local/zfs/bin:$PATH
       '';
@@ -213,7 +225,10 @@
       enableZshIntegration = true;
     };
 
-    difftastic.git.enable = true;
+    difftastic = {
+      enable = true;
+      git.enable = true;
+    };
   };
 
   services.pueue.enable = true;
