@@ -73,6 +73,7 @@ in
         "openzfs"
         "steam"
         "crossover"
+        "yacreader"
       ];
     };
   }
