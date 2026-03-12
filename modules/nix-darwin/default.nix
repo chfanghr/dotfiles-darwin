@@ -1,12 +1,15 @@
 {
   lib,
   config,
+  inputs,
   ...
 }: let
   inherit (lib) mkEnableOption mkOption types;
   inherit (config.dotfiles.darwin) hostname;
 in {
   imports = [
+    inputs.home-manager.darwinModules.default
+    inputs.determinate.darwinModules.default
     ./users
     ./determinate.nix
     ./doc.nix
@@ -32,6 +35,7 @@ in {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
+      extraSpecialArgs = {inherit inputs;};
     };
 
     nixpkgs.config.allowUnfree = true;

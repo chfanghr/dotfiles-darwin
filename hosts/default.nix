@@ -11,10 +11,9 @@
   }: let
     name = hostname;
     val = inputs.nix-darwin.lib.darwinSystem {
+      specialArgs = {inherit inputs;};
       inherit system;
       modules = [
-        inputs.home-manager.darwinModules.default
-        inputs.determinate.darwinModules.default
         ../modules/nix-darwin
         {dotfiles.darwin = {inherit hostname;};}
         ./${hostname}

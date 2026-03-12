@@ -1,8 +1,12 @@
 {
   pkgs,
-  config,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.nvf.homeManagerModules.default
+  ];
+
   home = {
     packages = with pkgs; [
       shfmt
@@ -57,7 +61,7 @@
 
         core = {
           autocrlf = "input";
-          editor = "${config.programs.neovim.package}/bin/nvim";
+          editor = "nvim";
         };
         init.defaultBranch = "main";
         "diff \"sopsdiffer\"".textconv = "sops -d";
@@ -92,13 +96,16 @@
 
     man.enable = true;
 
-    neovim = {
+    nvf = {
       enable = true;
-
-      viAlias = true;
-      vimAlias = true;
-
+      enableManpages = true;
       defaultEditor = true;
+      settings = {
+        vim = {
+          viAlias = false;
+          vimAlias = true;
+        };
+      };
     };
 
     ripgrep.enable = true;
