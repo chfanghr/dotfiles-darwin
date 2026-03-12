@@ -33,6 +33,8 @@
       fastfetch
     ];
 
+    shell.enableZshIntegration = true;
+
     stateVersion = "24.11";
   };
 
@@ -158,8 +160,6 @@
           source "$HOME/.iterm2_shell_integration.zsh"
         fi
 
-        export GPG_TTY="$(tty)"
-
         export PATH=/usr/local/zfs/bin:$PATH
       '';
 
@@ -223,6 +223,14 @@
     wezterm = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
+      extraConfig = ''
+        return {
+          font = wezterm.font("JetBrains Mono"),
+          font_size = 16.0,
+          hide_tab_bar_if_only_one_tab = true
+        }
+      '';
     };
 
     difftastic = {
@@ -231,5 +239,14 @@
     };
   };
 
-  services.pueue.enable = true;
+  services = {
+    pueue.enable = true;
+    gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      enableScDaemon = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
+  };
 }
