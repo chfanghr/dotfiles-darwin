@@ -100,11 +100,75 @@
       enable = true;
       enableManpages = true;
       defaultEditor = true;
-      settings = {
-        vim = {
-          viAlias = false;
-          vimAlias = true;
+      settings.vim = {
+        viAlias = false;
+        vimAlias = true;
+
+        theme = {
+          enable = true;
+          style = "night";
+          name = "tokyonight";
         };
+
+        spellcheck = {
+          enable = true;
+          programmingWordlist.enable = true;
+        };
+
+        lsp = {
+          enable = true;
+          trouble.enable = true;
+          lspsaga.enable = true;
+          nvim-docs-view.enable = true;
+          lightbulb.enable = true;
+        };
+
+        languages = {
+          enableFormat = true;
+          enableTreesitter = true;
+          enableExtraDiagnostics = true;
+
+          nix.enable = true;
+          markdown.enable = true;
+          lua.enable = true;
+          rust = {
+            enable = true;
+            extensions.crates-nvim.enable = true;
+          };
+          toml.enable = true;
+          ocaml.enable = true;
+          haskell.enable = true;
+        };
+
+        statusline = {
+          lualine = {
+            enable = true;
+            theme = "tokyonight";
+          };
+        };
+
+        autopairs.nvim-autopairs.enable = true;
+        autocomplete.blink-cmp.enable = true;
+        filetree.neo-tree.enable = true;
+        tabline.nvimBufferline.enable = true;
+        treesitter.context.enable = true;
+
+        git = {
+          enable = true;
+          neogit.enable = true;
+        };
+
+        utility = {
+          undotree.enable = true;
+          multicursors.enable = true;
+        };
+
+        terminal.toggleterm = {
+          enable = true;
+          lazygit.enable = true;
+        };
+
+        comments.comment-nvim.enable = true;
       };
     };
 
