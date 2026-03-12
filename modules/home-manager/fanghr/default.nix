@@ -225,11 +225,32 @@
       enableZshIntegration = true;
       enableBashIntegration = true;
       extraConfig = ''
-        return {
-          font = wezterm.font("JetBrains Mono"),
-          font_size = 16.0,
-          hide_tab_bar_if_only_one_tab = true
+        local wezterm = require 'wezterm'
+        local act = wezterm.action
+        local config = wezterm.config_builder()
+
+        config.font = wezterm.font("JetBrains Mono")
+        config.font_size = 16.0
+        config.hide_tab_bar_if_only_one_tab = true
+
+        config.keys = {
+          -- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
+          {
+            key = 'LeftArrow',
+            mods = 'OPT',
+            action = act.SendKey {
+              key = 'b',
+              mods = 'ALT',
+            },
+          },
+          {
+            key = 'RightArrow',
+            mods = 'OPT',
+            action = act.SendKey { key = 'f', mods = 'ALT' },
+          }
         }
+
+        return config
       '';
     };
 
