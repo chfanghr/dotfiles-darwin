@@ -169,6 +169,8 @@
         };
 
         comments.comment-nvim.enable = true;
+
+        visuals.nvim-scrollbar.enable = true;
       };
     };
 
