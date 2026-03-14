@@ -104,6 +104,13 @@
         viAlias = false;
         vimAlias = true;
 
+        options = {
+          expandtab = true;
+
+          tabstop = 2;
+          shiftwidth = 2;
+        };
+
         theme = {
           enable = true;
           style = "night";
@@ -138,6 +145,7 @@
           toml.enable = true;
           ocaml.enable = true;
           haskell.enable = true;
+          json.enable = true;
         };
 
         statusline = {
@@ -170,7 +178,28 @@
 
         comments.comment-nvim.enable = true;
 
-        visuals.nvim-scrollbar.enable = true;
+        visuals = {
+          nvim-scrollbar.enable = true;
+          fidget-nvim.enable = true;
+          cinnamon-nvim.enable = true;
+          blink-indent.enable = true;
+        };
+
+        binds = {
+          whichKey.enable = true;
+          cheatsheet.enable = true;
+        };
+
+        notify.nvim-notify.enable = true;
+
+        ui = {
+          noice.enable = true;
+          borders.enable = true;
+          illuminate.enable = true;
+          fastaction.enable = true;
+        };
+
+        session.nvim-session-manager.enable = true;
       };
     };
 
