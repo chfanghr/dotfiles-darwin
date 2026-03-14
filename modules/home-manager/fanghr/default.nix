@@ -141,6 +141,7 @@
           rust = {
             enable = true;
             extensions.crates-nvim.enable = true;
+            lsp.package = ["rust-analyzer"];
           };
           toml.enable = true;
           ocaml.enable = true;
