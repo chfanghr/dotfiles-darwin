@@ -129,6 +129,7 @@
           lspsaga.enable = true;
           nvim-docs-view.enable = true;
           lightbulb.enable = true;
+          lspkind.enable = true;
         };
 
         languages = {
