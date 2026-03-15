@@ -141,7 +141,21 @@
           rust = {
             enable = true;
             extensions.crates-nvim.enable = true;
-            lsp.package = ["rust-analyzer"];
+            lsp = {
+              package = ["rust-analyzer"];
+              opts = ''
+                ['rust-analyzer'] = {
+                  files = {
+                    excludeDirs = {
+                        ".cargo",
+                        ".direnv",
+                        ".git",
+                        "target",
+                    },
+                  },
+                },
+              '';
+            };
           };
           toml.enable = true;
           ocaml.enable = true;
