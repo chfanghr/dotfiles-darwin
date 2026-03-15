@@ -105,6 +105,17 @@
         viAlias = false;
         vimAlias = true;
 
+        clipboard.enable = true;
+
+        keymaps = [
+          {
+            key = "<leader>j";
+            mode = "n";
+            silent = true;
+            action = ":Neotree toggle<CR>";
+          }
+        ];
+
         options = {
           expandtab = true;
 
