@@ -35,6 +35,7 @@
       imhex
       winbox4
       fastfetch
+      bat
     ];
 
     shell.enableZshIntegration = true;
