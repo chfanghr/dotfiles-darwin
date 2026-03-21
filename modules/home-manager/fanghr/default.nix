@@ -293,6 +293,13 @@
         export PATH=/usr/local/zfs/bin:$PATH
       '';
 
+      shellAliases = let
+        toggleMetalHud = state: "defaults write -g MetalForceHudEnabled -bool ${state}";
+      in {
+        turnOnMetalHud = toggleMetalHud "YES";
+        tuenOffMetalHud = toggleMetalHud "NO";
+      };
+
       prezto = {
         enable = true;
         prompt = {
