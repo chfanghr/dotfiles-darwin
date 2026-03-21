@@ -7,6 +7,6 @@
       AppleShowAllExtensions = false;
       FXEnableExtensionChangeWarning = false;
     };
-    CustomUserPreferences."-g"."MetalForceHudEnabled" = true;
+    # CustomUserPreferences."-g"."MetalForceHudEnabled" = true;
   };
 }
