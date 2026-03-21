@@ -11,6 +11,7 @@ in {
     inputs.home-manager.darwinModules.default
     inputs.determinate.darwinModules.default
     ./users
+    ./defaults.nix
     ./determinate.nix
     ./doc.nix
     ./global.nix
