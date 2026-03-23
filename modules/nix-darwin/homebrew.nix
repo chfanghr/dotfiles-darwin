@@ -74,6 +74,8 @@ in
         "steam"
         "crossover"
         "yacreader"
+        "music-presence"
+        "keepingyouawake"
       ];
     };
   }
