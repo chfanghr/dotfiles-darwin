@@ -1,6 +1,13 @@
-{inputs, ...}: {
+{
+  inputs,
+  self,
+  ...
+}: {
   flake.homeModules.fanghr = {
     imports = [./fanghr];
-    _module.args = {inherit inputs;};
+    _module.args = {
+      inherit inputs;
+      inherit (self) nvfModules;
+    };
   };
 }

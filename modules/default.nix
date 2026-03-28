@@ -1,3 +1,7 @@
 {
-  imports = [./home-manager ./nix-darwin];
+  imports = [
+    ./home-manager
+    ./nix-darwin
+    ./nvf
+  ];
 }
