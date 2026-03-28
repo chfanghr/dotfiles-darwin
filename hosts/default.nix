@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  self,
   ...
 }: let
   inherit (lib) nameValuePair listToAttrs;
@@ -14,7 +15,7 @@
       specialArgs = {inherit inputs;};
       inherit system;
       modules = [
-        ../modules/nix-darwin
+        self.darwinModules.common
         {dotfiles.darwin = {inherit hostname;};}
         ./${hostname}
       ];

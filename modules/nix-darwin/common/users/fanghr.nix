@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  homeModules,
+  ...
+}: {
   users.users.fanghr = {
     home = "/Users/fanghr";
     openssh.authorizedKeys.keys = [
@@ -9,5 +13,5 @@
 
   programs.zsh.enable = true;
 
-  home-manager.users.fanghr = import ../../home-manager/fanghr;
+  home-manager.users = {inherit (homeModules) fanghr;};
 }
