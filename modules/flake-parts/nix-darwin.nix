@@ -9,6 +9,6 @@
       inherit (self) homeModules;
     };
 
-    imports = [./common];
+    imports = [../nix-darwin/common];
   };
 }

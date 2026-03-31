@@ -3,7 +3,7 @@
   self,
   ...
 }: {
-  flake.nvfModules.common = import ./common;
+  flake.nvfModules.common = import ../nvf/common;
 
   perSystem = {pkgs, ...}: {
     packages.nvim-common =

@@ -4,8 +4,8 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkOption types;
-  inherit (config.dotfiles.darwin) hostname;
+  inherit (lib) mkOption types;
+  inherit (config.dotfiles.darwin) hostname arch;
 in {
   imports = [
     inputs.home-manager.darwinModules.default
@@ -23,12 +23,13 @@ in {
 
   options = {
     dotfiles.darwin = {
-      slim =
-        mkEnableOption "only enable the bare minimum"
-        // {
-          default = false;
-        };
       hostname = mkOption {type = types.str;};
+      arch = mkOption {
+        type = types.enum [
+          "aarch64"
+          "x86_64"
+        ];
+      };
     };
   };
 
@@ -39,14 +40,17 @@ in {
       extraSpecialArgs = {inherit inputs;};
     };
 
-    nixpkgs.config.allowUnfree = true;
-
     system.stateVersion = 6;
 
     networking = {
       computerName = hostname;
       localHostName = hostname;
       hostName = hostname;
+    };
+
+    nixpkgs = {
+      system = "${arch}-darwin";
+      config.allowUnfree = true;
     };
   };
 }

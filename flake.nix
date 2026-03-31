@@ -35,7 +35,7 @@
         ];
         imports = [
           inputs.git-hooks-nix.flakeModule
-          ./modules
+          ./modules/flake-parts
           ./hosts
         ];
         perSystem = {
