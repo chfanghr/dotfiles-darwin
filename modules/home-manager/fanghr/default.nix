@@ -1,43 +1,48 @@
 {
+  lib,
   pkgs,
   inputs,
   nvfModules,
   ...
-}: {
+}: let
+  inherit (lib) elem filter;
+  supportedPackagesOnly = filter (pkgs: elem pkgs.stdenv.hostPlatform.system pkgs.meta.platforms);
+in {
   imports = [
     inputs.nvf.homeManagerModules.default
   ];
 
   home = {
-    packages = with pkgs; [
-      shfmt
-      nixpkgs-fmt
-      jq
-      wget
-      curl
-      htop
-      btop
-      rsync
-      mosh
-      wakatime-cli
-      clang
-      clang-tools
-      cmake
-      pkg-config
-      fmt
-      nix-tree
-      nix-du
-      nix-prefetch-git
-      cachix
-      nix-output-monitor
-      nil
-      nerd-fonts.jetbrains-mono
-      sops
-      imhex
-      winbox4
-      fastfetch
-      bat
-    ];
+    packages = with pkgs;
+      supportedPackagesOnly [
+        shfmt
+        nixpkgs-fmt
+        jq
+        wget
+        curl
+        htop
+        btop
+        rsync
+        mosh
+        wakatime-cli
+        clang
+        clang-tools
+        cmake
+        pkg-config
+        fmt
+        nix-tree
+        nix-du
+        nix-prefetch-git
+        cachix
+        nix-output-monitor
+        nil
+        nerd-fonts.jetbrains-mono
+        sops
+        imhex
+        winbox4
+        fastfetch
+        bat
+      ];
 
     shell.enableZshIntegration = true;
 
