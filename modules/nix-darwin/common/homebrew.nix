@@ -76,6 +76,7 @@ in
         "yacreader"
         "music-presence"
         "keepingyouawake"
+        "firefox"
       ];
     };
   }
