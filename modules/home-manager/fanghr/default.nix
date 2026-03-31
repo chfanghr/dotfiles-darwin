@@ -5,8 +5,10 @@
   nvfModules,
   ...
 }: let
-  inherit (lib) elem filter;
-  supportedPackagesOnly = filter (pkgs: elem pkgs.stdenv.hostPlatform.system pkgs.meta.platforms);
+  inherit (lib) elem filter optionalAttrs;
+  isPackageSupported = pkgs: elem pkgs.stdenv.hostPlatform.system pkgs.meta.platforms;
+  supportedPackagesOnly = filter isPackageSupported;
+  preferedJVM = pkgs.graalvmPackages.graalvm-ce;
 in {
   imports = [
     inputs.nvf.homeManagerModules.default
@@ -98,10 +100,13 @@ in {
 
     home-manager.enable = true;
 
-    java = {
-      enable = true;
-      package = pkgs.graalvmPackages.graalvm-ce;
-    };
+    java =
+      {
+        enable = true;
+      }
+      // (optionalAttrs (isPackageSupported preferedJVM) {
+        package = preferedJVM;
+      });
 
     man.enable = true;
 
