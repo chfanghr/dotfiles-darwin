@@ -12,11 +12,11 @@ in {
     inputs.determinate.darwinModules.default
     ./users
     ./defaults.nix
-    ./determinate.nix
     ./doc.nix
     ./global.nix
     ./homebrew.nix
     ./keyboard.nix
+    ./nix.nix
     ./security.nix
     ./services.nix
   ];
