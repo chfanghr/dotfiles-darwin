@@ -11,7 +11,7 @@
     "microvm.cachix.org-1:oXnBc6hRE3eX5rSYdRyMYXnfzcCxC7yKPTbZXALsqys="
     "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
   ];
-  inherit (lib) mkMerge mkIf;
+  inherit (lib) mkOverride mkMerge mkIf;
   mkIfElse = p: yes: no:
     mkMerge [
       (mkIf p yes)
@@ -35,7 +35,7 @@ in
   }
   {
     nix = {
-      enable = true;
+      enable = mkOverride 10 true;
       gc.automatic = true;
     };
   }
