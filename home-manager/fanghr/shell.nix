@@ -17,11 +17,7 @@ in {
 
     ripgrep.enable = true;
 
-    zellij = {
-      enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-    };
+    zellij.enable = true;
 
     zsh = {
       enable = true;
