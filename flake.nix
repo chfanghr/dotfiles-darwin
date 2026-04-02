@@ -26,37 +26,13 @@
   };
 
   outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} (
-      {...}: {
-        systems = [
-          "x86_64-linux"
-          "aarch64-linux"
-          "aarch64-darwin"
-        ];
-        imports = [
-          inputs.git-hooks-nix.flakeModule
-          ./modules/flake-parts
-          ./hosts
-        ];
-        perSystem = {
-          pkgs,
-          config,
-          ...
-        }: {
-          pre-commit.settings.hooks = {
-            alejandra.enable = true;
-            deadnix.enable = true;
-          };
-
-          devShells.default = pkgs.mkShell {
-            shellHook = ''
-              ${config.pre-commit.shellHook}
-              echo 1>&2 "Welcome to the development shell!"
-            '';
-
-            packages = config.pre-commit.settings.enabledPackages;
-          };
-        };
-      }
-    );
+    flake-parts.lib.mkFlake {inherit inputs;}
+    {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+      imports = [./flake-parts];
+    };
 }

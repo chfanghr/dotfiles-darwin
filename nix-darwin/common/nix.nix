@@ -19,7 +19,7 @@
     ];
 in
   # NOTE: determinate nix only support apple silicon
-  mkIfElse (config.dotfiles.darwin.arch == "aarch64")
+  mkIfElse (config.my.shared.inheritable.machine.arch == "aarch64")
   {
     determinateNix = {
       enable = true;

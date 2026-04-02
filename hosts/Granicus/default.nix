@@ -1,5 +1,5 @@
 {
-  dotfiles.darwin = {
+  my.shared.inheritable.machine = {
     hostname = "Granicus";
     arch = "x86_64";
   };

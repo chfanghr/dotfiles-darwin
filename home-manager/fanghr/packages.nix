@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  inherit (config.my.shared.lib) supportedPackagesOnly;
+  inherit (config.my.lib) supportedPackagesOnly;
 in {
   home.packages = with pkgs;
     supportedPackagesOnly [

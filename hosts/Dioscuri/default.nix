@@ -1,5 +1,5 @@
 {
-  dotfiles.darwin = {
+  my.shared.inheritable.machine = {
     hostname = "Dioscuri";
     arch = "aarch64";
   };

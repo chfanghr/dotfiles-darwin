@@ -1,17 +1,11 @@
-{
+{nvfModules, ...}: {
   lib,
   config,
-  nvfModules,
-  inputs,
   ...
 }: let
   inherit (lib) optionalString optionalAttrs;
   inherit (config.my.shared.machine) isDarwin;
 in {
-  imports = [
-    inputs.nvf.homeManagerModules.default
-  ];
-
   programs = {
     direnv = {
       enable = true;

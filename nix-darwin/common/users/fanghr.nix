@@ -1,6 +1,6 @@
-{
+{homeModules, ...}: {
   pkgs,
-  homeModules,
+  config,
   ...
 }: {
   users.users.fanghr = {
@@ -13,5 +13,8 @@
 
   programs.zsh.enable = true;
 
-  home-manager.users = {inherit (homeModules) fanghr;};
+  home-manager.users.fanghr = {
+    imports = [homeModules.fanghr];
+    my.shared = {inherit (config.my.shared) inheritable;};
+  };
 }

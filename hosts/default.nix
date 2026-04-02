@@ -18,7 +18,7 @@
   in
     nameValuePair name val;
 in {
-  flake.darwinConfigurations = listToAttrs [
+  darwin = listToAttrs [
     (mkDarwinSystem {hostname = "Dioscuri";})
     (mkDarwinSystem {hostname = "Hera";})
     (mkDarwinSystem {hostname = "Granicus";})

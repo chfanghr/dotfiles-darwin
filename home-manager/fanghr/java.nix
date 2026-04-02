@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  inherit (config.my.shared.lib) isPackageSupported;
+  inherit (config.my.lib) isPackageSupported;
   preferedJavaPackage = pkgs.graalvmPackages.graalvm-ce;
   javaPackage =
     if isPackageSupported preferedJavaPackage
