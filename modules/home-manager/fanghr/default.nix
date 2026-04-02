@@ -2,6 +2,7 @@
   lib,
   pkgs,
   inputs,
+  config,
   nvfModules,
   ...
 }: let
@@ -11,6 +12,7 @@
     filter
     optionalAttrs
     optionalString
+    getExe
     ;
   inherit (pkgs.stdenv) isDarwin;
 
@@ -18,6 +20,8 @@
   supportedPackagesOnly = filter isPackageSupported;
 
   preferedJVM = pkgs.graalvmPackages.graalvm-ce;
+
+  nvim = getExe config.programs.nvf.finalPackage;
 in {
   imports = [
     inputs.nvf.homeManagerModules.default
@@ -53,6 +57,7 @@ in {
         winbox4
         fastfetch
         bat
+        sops
       ];
 
     shell.enableZshIntegration = true;
@@ -81,9 +86,11 @@ in {
 
         core = {
           autocrlf = "input";
-          editor = "nvim";
+          editor = nvim;
         };
+
         init.defaultBranch = "main";
+
         "diff \"sopsdiffer\"".textconv = "sops -d";
 
         alias = rec {
@@ -105,6 +112,21 @@ in {
         "result"
         "result-*"
       ];
+    };
+
+    jujutsu = {
+      enable = true;
+      ediff = false;
+
+      settings = {
+        user = {
+          name = "Hongrui Fang";
+          email = "chfanghr@gmail.com";
+        };
+        ui = {
+          editor = nvim;
+        };
+      };
     };
 
     home-manager.enable = true;
