@@ -4,8 +4,9 @@
   lib,
   ...
 }: let
-  inherit (lib) optionals;
+  inherit (lib) optionals mkMerge mkIf;
   inherit (config.my.lib) supportedPackagesOnly;
+  inherit (config.my.shared.machine) isDarwin;
   inherit (config.my.shared.inheritable.env) isSlim isDesktop;
 
   basicPackages = with pkgs; [
@@ -45,7 +46,19 @@
       wakatime-cli
     ]
   );
-in {
-  home.packages = supportedPackagesOnly (basicPackages ++ extraCliPackages ++ desktopPackages);
-  fonts.fontconfig.enable = isDesktop;
-}
+in
+  mkMerge [
+    {
+      home.packages = supportedPackagesOnly (basicPackages ++ extraCliPackages ++ desktopPackages);
+      fonts.fontconfig.enable = isDesktop;
+    }
+    (mkIf isDarwin {
+      targets.darwin = {
+        linkApps.enable = false;
+        copyApps = {
+          enable = true;
+          enableChecks = false;
+        };
+      };
+    })
+  ]
