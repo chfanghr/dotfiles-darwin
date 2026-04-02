@@ -5,9 +5,18 @@
   nvfModules,
   ...
 }: let
-  inherit (lib) elem filter optionalAttrs;
+  inherit
+    (lib)
+    elem
+    filter
+    optionalAttrs
+    optionalString
+    ;
+  inherit (pkgs.stdenv) isDarwin;
+
   isPackageSupported = pkgs: elem pkgs.stdenv.hostPlatform.system pkgs.meta.platforms;
   supportedPackagesOnly = filter isPackageSupported;
+
   preferedJVM = pkgs.graalvmPackages.graalvm-ce;
 in {
   imports = [
@@ -171,20 +180,31 @@ in {
         path = "$HOME/.local/share/zsh/history";
       };
 
-      initContent = ''
-        if [[ -r "$HOME/.iterm2_shell_integration.zsh" ]]; then
-          source "$HOME/.iterm2_shell_integration.zsh"
-        fi
-
-        export PATH=/usr/local/zfs/bin:$PATH
+      initContent = let
+        darwinSpecific = optionalString isDarwin ''
+          export PATH=/usr/local/zfs/bin:$PATH
+        '';
+      in ''
+        ${darwinSpecific}
       '';
 
-      shellAliases = let
-        toggleMetalHud = state: "defaults write -g MetalForceHudEnabled -bool ${state}";
-      in {
-        turnOnMetalHud = toggleMetalHud "YES";
-        tuenOffMetalHud = toggleMetalHud "NO";
-      };
+      shellAliases =
+        {
+          ssh-dont-check-host-key = ''ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'';
+        }
+        // optionalAttrs isDarwin (
+          let
+            toggleMetalHud = state: "defaults write -g MetalForceHudEnabled -bool ${
+              if state
+              then "YES"
+              else "NO"
+            }";
+          in {
+            turn-on-metal-hud = toggleMetalHud true;
+            turn-off-metal-hud = toggleMetalHud false;
+            fuck-bluetooth = "sudo pkill bluetoothd";
+          }
+        );
 
       prezto = {
         enable = true;
@@ -227,27 +247,30 @@ in {
       enableZshIntegration = true;
     };
 
-    alacritty = {
-      enable = true;
-      settings = {
-        font = {
-          normal.family = "JetBrainsMono Nerd Font Mono";
-          size = 18;
-        };
-        colors = {
-          primary = {
-            background = "0x000000";
-            foreground = "0xffffff";
-          };
-        };
-      };
-    };
-
     wezterm = {
       enable = true;
       enableZshIntegration = true;
       enableBashIntegration = true;
-      extraConfig = ''
+      extraConfig = let
+        darwinSpecific = optionalString isDarwin ''
+          config.keys = {
+            -- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
+            {
+              key = 'LeftArrow',
+              mods = 'OPT',
+              action = act.SendKey {
+                key = 'b',
+                mods = 'ALT',
+              },
+            },
+            {
+              key = 'RightArrow',
+              mods = 'OPT',
+              action = act.SendKey { key = 'f', mods = 'ALT' },
+            }
+          }
+        '';
+      in ''
         local wezterm = require 'wezterm'
         local act = wezterm.action
         local config = wezterm.config_builder()
@@ -256,22 +279,7 @@ in {
         config.font_size = 16.0
         config.hide_tab_bar_if_only_one_tab = true
 
-        config.keys = {
-          -- Rebind OPT-Left, OPT-Right as ALT-b, ALT-f respectively to match Terminal.app behavior
-          {
-            key = 'LeftArrow',
-            mods = 'OPT',
-            action = act.SendKey {
-              key = 'b',
-              mods = 'ALT',
-            },
-          },
-          {
-            key = 'RightArrow',
-            mods = 'OPT',
-            action = act.SendKey { key = 'f', mods = 'ALT' },
-          }
-        }
+        ${darwinSpecific}
 
         return config
       '';
@@ -285,6 +293,7 @@ in {
 
   services = {
     pueue.enable = true;
+
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
