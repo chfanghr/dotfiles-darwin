@@ -35,6 +35,7 @@ in
   }
   {
     nix = {
+      settings.experimental-features = ["nix-command" "flakes"];
       enable = mkOverride 10 true;
       gc.automatic = true;
     };
