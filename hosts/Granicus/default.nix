@@ -6,4 +6,6 @@
     };
     env.isSlim = true;
   };
+
+  ids.gids.nixbld = 30000;
 }
