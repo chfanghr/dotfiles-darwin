@@ -5,6 +5,7 @@
 }: let
   inherit (lib) optionalString optionalAttrs;
   inherit (config.my.shared.machine) isDarwin;
+  inherit (config.my.shared.inheritable.env) isGamingRig;
 in {
   programs = {
     direnv = {
@@ -43,7 +44,8 @@ in {
         {
           ssh-dont-check-host-key = ''ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'';
         }
-        // optionalAttrs isDarwin (
+        // optionalAttrs isDarwin {fuck-bluetooth = "sudo pkill bluetoothd";}
+        // optionalAttrs (isDarwin && isGamingRig) (
           let
             toggleMetalHud = state: "defaults write -g MetalForceHudEnabled -bool ${
               if state
@@ -53,7 +55,6 @@ in {
           in {
             turn-on-metal-hud = toggleMetalHud true;
             turn-off-metal-hud = toggleMetalHud false;
-            fuck-bluetooth = "sudo pkill bluetoothd";
           }
         );
 

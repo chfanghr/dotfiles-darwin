@@ -3,13 +3,9 @@
     pinentry_mac
     curl
     rsync
-    cachix
     htop
     coreutils
     file
-    zellij
-    gnupg
-    vfkit
   ];
 
   programs = {

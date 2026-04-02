@@ -1,22 +1,29 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: let
+  inherit (lib) optionals;
   inherit (config.my.lib) supportedPackagesOnly;
-in {
-  home.packages = with pkgs;
-    supportedPackagesOnly [
+  inherit (config.my.shared.inheritable.env) isSlim isDesktop;
+
+  basicPackages = with pkgs; [
+    curl
+    mosh
+    rsync
+    htop
+    bat
+    sops
+    jq
+  ];
+
+  extraCliPackages = optionals (!isSlim) (
+    with pkgs; [
       shfmt
       nixpkgs-fmt
-      jq
       wget
-      curl
-      htop
       btop
-      rsync
-      mosh
-      wakatime-cli
       clang
       clang-tools
       cmake
@@ -24,16 +31,21 @@ in {
       fmt
       nix-tree
       nix-du
-      nix-prefetch-git
-      cachix
       nix-output-monitor
-      nil
-      nerd-fonts.jetbrains-mono
       sops
+      fastfetch
+      nil
+    ]
+  );
+  desktopPackages = optionals isDesktop (
+    with pkgs; [
+      nerd-fonts.jetbrains-mono
       imhex
       winbox4
-      fastfetch
-      bat
-      sops
-    ];
+      wakatime-cli
+    ]
+  );
+in {
+  home.packages = supportedPackagesOnly (basicPackages ++ extraCliPackages ++ desktopPackages);
+  fonts.fontconfig.enable = isDesktop;
 }

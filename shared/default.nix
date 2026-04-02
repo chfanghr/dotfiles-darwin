@@ -44,10 +44,27 @@ in {
       inheritable = {
         machine = {
           arch = mkOption {
-            type = types.enum ["aarch64" "x86_64"];
+            type = types.enum [
+              "aarch64"
+              "x86_64"
+            ];
           };
           hostname = mkOption {
             type = types.str;
+          };
+        };
+        env = {
+          isSlim = mkOption {
+            type = types.bool;
+            default = false;
+          };
+          isDesktop = mkOption {
+            type = types.bool;
+            default = false;
+          };
+          isGamingRig = mkOption {
+            type = types.bool;
+            default = false;
           };
         };
       };
