@@ -72,6 +72,7 @@
       ocaml.enable = true;
       haskell.enable = true;
       json.enable = true;
+      clang.enable = true;
     };
 
     statusline = {
