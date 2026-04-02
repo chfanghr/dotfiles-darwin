@@ -57,7 +57,7 @@ in
         linkApps.enable = false;
         copyApps = {
           enable = true;
-          enableChecks = false;
+          # enableChecks = false;
         };
       };
     })
