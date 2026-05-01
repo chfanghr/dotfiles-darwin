@@ -75,6 +75,7 @@ in
           "music-presence"
           "keepingyouawake"
           "firefox"
+          "betterzip"
         ]
         ++ (optionals isGamingRig [
           "steam"
