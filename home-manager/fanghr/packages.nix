@@ -44,6 +44,7 @@
       imhex
       winbox4
       wakatime-cli
+      zed-editor
     ]
   );
 in
