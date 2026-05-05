@@ -40,7 +40,10 @@ in {
         {
           ssh-dont-check-host-key = ''ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'';
         }
-        // optionalAttrs isDarwin {fuck-bluetooth = "sudo pkill bluetoothd";}
+        // optionalAttrs isDarwin {
+          fuck-scim = "sudo pkill SCIM_Extension";
+          fuck-bluetooth = "sudo pkill bluetoothd";
+        }
         // optionalAttrs (isDarwin && isGamingRig) (
           let
             toggleMetalHud = state: "defaults write -g MetalForceHudEnabled -bool ${
