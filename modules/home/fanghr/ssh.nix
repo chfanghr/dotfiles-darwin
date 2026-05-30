@@ -7,38 +7,38 @@
 
       enableDefaultConfig = false;
 
-      matchBlocks = {
+      settings = {
         "*" = {
-          forwardAgent = false;
-          addKeysToAgent = "no";
-          compression = false;
-          serverAliveInterval = 0;
-          serverAliveCountMax = 3;
-          hashKnownHosts = false;
-          userKnownHostsFile = "~/.ssh/known_hosts";
-          controlMaster = "auto";
-          controlPath = "~/.ssh/master-%r@%n:%p";
-          controlPersist = "no";
+          ForwardAgent = false;
+          AddKeysToAgent = "no";
+          Compression = false;
+          ServerAliveInterval = 0;
+          ServerAliveCountMax = 3;
+          HashKnownHosts = false;
+          UserKnownHostsFile = "~/.ssh/known_hosts";
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/master-%r@%n:%p";
+          ControlPersist = "no";
         };
         "demeter.vscode" = {
-          hostname = "demeter.snow-dace.ts.net";
-          user = "fanghr";
+          HostName = "demeter.snow-dace.ts.net";
+          User = "fanghr";
         };
         "poseidon.vscode" = {
-          hostname = "poseidon.snow-dace.ts.net";
-          user = "fanghr";
+          HostName = "poseidon.snow-dace.ts.net";
+          User = "fanghr";
         };
         "hestia.vscode" = {
-          hostname = "hestia.snow-dace.ts.net";
-          user = "fanghr";
+          HostName = "hestia.snow-dace.ts.net";
+          User = "fanghr";
         };
         "persephone.vscode" = {
-          hostname = "persephone.snow-dace.ts.net";
-          user = "fanghr";
+          HostName = "persephone.snow-dace.ts.net";
+          User = "fanghr";
         };
         "anemoi.vscode" = {
-          hostname = "anemoi.snow-dace.ts.net";
-          user = "fanghr";
+          HostName = "anemoi.snow-dace.ts.net";
+          User = "fanghr";
         };
       };
     };
