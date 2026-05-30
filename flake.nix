@@ -26,8 +26,12 @@
     };
   };
 
-  outputs = inputs @ {flake-parts, ...}: let
-    modules = inputs.import-tree ./modules;
+  outputs = inputs @ {
+    flake-parts,
+    import-tree,
+    ...
+  }: let
+    modules = import-tree ./modules;
   in
     flake-parts.lib.mkFlake {inherit inputs;}
     (modules
