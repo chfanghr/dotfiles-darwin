@@ -43,6 +43,13 @@ in
 
           ${darwinSpecific}
 
+          wezterm.on("open-uri", function(window, pane, uri)
+            if uri:match("^https?://") then
+              wezterm.run_child_process({ "open", "-a", "Safari", uri })
+              return false
+            end
+          end)
+
           return config
         '';
       };
