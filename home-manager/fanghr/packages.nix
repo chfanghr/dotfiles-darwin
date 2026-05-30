@@ -45,6 +45,7 @@
       winbox4
       wakatime-cli
       zed-editor
+      opencode
     ]
   );
 in
