@@ -15,6 +15,7 @@
     };
     microvm-nix.url = "github:microvm-nix/microvm.nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
     git-hooks-nix = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,14 +26,22 @@
     };
   };
 
-  outputs = inputs @ {flake-parts, ...}:
+  outputs = inputs @ {flake-parts, ...}: let
+    modules = inputs.import-tree ./modules;
+  in
     flake-parts.lib.mkFlake {inherit inputs;}
-    {
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
-      imports = [./flake-parts];
-    };
+    (modules
+      // {
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+          "aarch64-darwin"
+        ];
+
+        imports =
+          modules.imports
+          ++ [
+            ./pre-commit.nix
+          ];
+      });
 }
