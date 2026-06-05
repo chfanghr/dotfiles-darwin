@@ -73,6 +73,11 @@
         enable = true;
         git.enable = true;
       };
+
+      lazygit = {
+        enable = true;
+        settings.git.autoFetch = false;
+      };
     };
   };
 }
