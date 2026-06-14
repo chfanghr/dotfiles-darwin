@@ -4,13 +4,16 @@
     lib,
     ...
   }: let
-    substituters = [
+    trusted-substituters = [
       "https://microvm.cachix.org"
       "https://cache.iog.io"
+      "https://unison.cachix.org"
     ];
+
     trusted-public-keys = [
       "microvm.cachix.org-1:oXnBc6hRE3eX5rSYdRyMYXnfzcCxC7yKPTbZXALsqys="
       "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+      "unison.cachix.org-1:i1DUFkisRPVOyLp/vblDsbsObmyCviq/zs6eRuzth3k="
     ];
     inherit (lib) mkOverride mkMerge mkIf;
     mkIfElse = p: yes: no:
@@ -26,7 +29,7 @@
         enable = true;
         customSettings = {
           eval-cores = 0;
-          inherit substituters trusted-public-keys;
+          inherit trusted-substituters trusted-public-keys;
         };
         determinateNixd = {
           garbageCollector.strategy = "automatic";
