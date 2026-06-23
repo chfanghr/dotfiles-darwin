@@ -5,7 +5,7 @@
     lib,
     ...
   }: let
-    inherit (lib) optionals mkMerge mkIf;
+    inherit (lib) optionals mkMerge mkIf nameValuePair listToAttrs;
     inherit (config.my.lib) supportedPackagesOnly;
     inherit (config.my.shared.machine) isDarwin;
     inherit (config.my.shared.inheritable.env) isSlim isDesktop;
@@ -39,6 +39,7 @@
         nil
       ]
     );
+
     desktopPackages = optionals isDesktop (
       with pkgs; [
         nerd-fonts.jetbrains-mono
@@ -49,8 +50,28 @@
         opencode
       ]
     );
+
+    mkRcloneSftpHost = host:
+      nameValuePair host {
+        config = {
+          type = "sftp";
+          inherit host;
+          key_use_agent = true;
+          shell_type = "unix";
+          known_hosts_file = "$HOME/.ssh/known_hosts";
+        };
+      };
   in
     mkMerge [
+      (mkIf isDesktop {
+        programs.rclone = {
+          enable = true;
+          remotes = listToAttrs [
+            (mkRcloneSftpHost "hestia")
+            (mkRcloneSftpHost "apollo")
+          ];
+        };
+      })
       {
         home.packages = supportedPackagesOnly (basicPackages ++ extraCliPackages ++ desktopPackages);
         fonts.fontconfig.enable = isDesktop;
