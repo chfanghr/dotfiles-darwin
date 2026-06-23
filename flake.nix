@@ -2,8 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-darwin = {
-      # url = "github:nix-darwin/nix-darwin";
-      url = "github:stepbrobd/nix-darwin/bundle";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     determinate = {
