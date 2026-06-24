@@ -48,6 +48,7 @@
         wakatime-cli
         zed-editor
         opencode
+        element-desktop
       ]
     );
 
