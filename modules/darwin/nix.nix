@@ -1,9 +1,13 @@
 {
   flake.modules.darwin.common = {
     config,
+    inputs,
     lib,
+    pkgs,
     ...
   }: let
+    pkgs2605 = import inputs.nixpkgs2605 {inherit (pkgs.stdenv.hostPlatform) system;};
+
     trusted-substituters = [
       "https://microvm.cachix.org"
       "https://cache.iog.io"
@@ -34,7 +38,10 @@
         determinateNixd = {
           garbageCollector.strategy = "automatic";
         };
-        nixosVmBasedLinuxBuilder.enable = true;
+        nixosVmBasedLinuxBuilder = {
+          enable = true;
+          package = pkgs2605.darwin.linux-builder;
+        };
       };
     }
     {
