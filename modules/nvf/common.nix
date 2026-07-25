@@ -1,4 +1,4 @@
-{
+{lib, ...}: {
   flake.modules.nvf.common = {
     vim = {
       viAlias = false;
@@ -40,6 +40,15 @@
         nvim-docs-view.enable = true;
         lightbulb.enable = true;
         lspkind.enable = true;
+        servers."rust-analyzer" = {
+          cmd = lib.mkForce ["rust-analyzer"];
+          settings."rust-analyzer".files.excludeDirs = [
+            ".cargo"
+            ".direnv"
+            ".git"
+            "target"
+          ];
+        };
       };
 
       languages = {
@@ -53,21 +62,6 @@
         rust = {
           enable = true;
           extensions.crates-nvim.enable = true;
-          lsp = {
-            package = ["rust-analyzer"];
-            opts = ''
-              ['rust-analyzer'] = {
-                files = {
-                  excludeDirs = {
-                      ".cargo",
-                      ".direnv",
-                      ".git",
-                      "target",
-                  },
-                },
-              };
-            '';
-          };
         };
         toml.enable = true;
         ocaml.enable = true;
