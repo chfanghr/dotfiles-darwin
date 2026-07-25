@@ -11,6 +11,7 @@ in {
     imports = [
       inputs.home-manager.darwinModules.default
       inputs.determinate.darwinModules.default
+      inputs.nix-index-database.darwinModules.nix-index
       topConfig.flake.modules.darwin.shared
     ];
 
