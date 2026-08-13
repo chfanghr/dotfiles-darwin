@@ -78,6 +78,7 @@
             "keepingyouawake"
             "firefox"
             "betterzip"
+            "open-webui"
           ]
           ++ (optionals isGamingRig [
             "steam"
