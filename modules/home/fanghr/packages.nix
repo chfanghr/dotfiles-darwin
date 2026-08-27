@@ -49,6 +49,7 @@
         zed-editor
         opencode
         element-desktop
+        moonlight-qt
       ]
     );
 

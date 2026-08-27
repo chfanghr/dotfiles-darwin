@@ -39,7 +39,7 @@
           # Steam
           "Steam Link" = 1246969117;
           # FIXME: Shadowrocket = ??? doesn't work atm
-          VidHub = 1659622164;
+          # VidHub = 1659622164;
           "WhatsApp Messenger" = 310633997;
           "NepTunes for iTunes & Spotify" = 1006739057;
         };
@@ -54,8 +54,6 @@
         casks =
           [
             "music-presence"
-            "notion"
-            "grammarly-desktop"
             # NOTE: use home-manager
             # "kitty"
             "foobar2000"
@@ -79,6 +77,8 @@
             "firefox"
             "betterzip"
             "open-webui"
+            "kde-connect"
+            "unsloth"
           ]
           ++ (optionals isGamingRig [
             "steam"
