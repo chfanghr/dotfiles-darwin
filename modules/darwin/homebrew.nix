@@ -79,6 +79,7 @@
             "open-webui"
             "kde-connect"
             "unsloth"
+            "lulu"
           ]
           ++ (optionals isGamingRig [
             "steam"
