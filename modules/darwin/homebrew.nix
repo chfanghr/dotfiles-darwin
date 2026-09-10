@@ -80,6 +80,7 @@
             "kde-connect"
             "unsloth"
             "lulu"
+            "google-chrome"
           ]
           ++ (optionals isGamingRig [
             "steam"
