@@ -41,6 +41,7 @@
         nixosVmBasedLinuxBuilder = {
           enable = true;
           package = pkgs2605.darwin.linux-builder;
+          config.virtualisation.cores = 8;
         };
       };
     }
