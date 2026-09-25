@@ -40,6 +40,10 @@
           HostName = "anemoi.snow-dace.ts.net";
           User = "fanghr";
         };
+        "dionysus.vscode" = {
+          HostName = "dionysus.snow-dace.ts.net";
+          User = "fanghr";
+        };
       };
     };
   };
