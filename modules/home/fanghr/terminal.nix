@@ -52,8 +52,6 @@
           return config
         '';
       };
-
-      tmate.enable = true;
     };
   };
 }
