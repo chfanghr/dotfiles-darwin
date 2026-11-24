@@ -42,6 +42,7 @@
           # VidHub = 1659622164;
           "WhatsApp Messenger" = 310633997;
           "NepTunes for iTunes & Spotify" = 1006739057;
+          "Console Remote" = 6738534883;
         };
         brews = [
           # FIXME: requires arch -x86_64 wrapper
